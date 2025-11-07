@@ -198,8 +198,8 @@ exports.getUserBookings = async (req, res) => {
   try {
     const user_id = req.user.id;
     const bookings = await Booking.find({ user_id })
-      .populate("hotel_id", "name city")
-      .populate("room_id", "room_number"); // Populate các thông tin cần thiết
+      .populate("hotel_id", "name city images")
+      .populate("room_id", "room_number images"); // Populate các thông tin cần thiết
 
     res.json({ bookings });
   } catch (error) {
@@ -219,8 +219,8 @@ exports.getOwnerBookings = async (req, res) => {
 
     // 2. Tìm tất cả Bookings thuộc các Hotel này
     const bookings = await Booking.find({ hotel_id: { $in: hotelIds } })
-      .populate("hotel_id", "name city")
-      .populate("room_id", "room_number")
+      .populate("hotel_id", "name city images")
+      .populate("room_id", "room_number images")
       .populate("user_id", "email username"); // Thông tin user đặt
 
     res.json({ bookings });
@@ -242,8 +242,8 @@ exports.getAllBookings = async (req, res) => {
     }
 
     const bookings = await Booking.find({})
-      .populate("hotel_id", "name city")
-      .populate("room_id", "room_number")
+      .populate("hotel_id", "name city images")
+      .populate("room_id", "room_number images")
       .populate("user_id", "email username");
 
     res.json({ bookings });
