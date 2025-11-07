@@ -253,3 +253,6 @@ exports.getAllBookings = async (req, res) => {
       .json({ message: "Error fetching all bookings", error: error.message });
   }
 };
+
+
+
